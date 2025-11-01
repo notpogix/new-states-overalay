@@ -3,14 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
       background: transparent;
       overflow: hidden;
-    }
-
-    #container {
       display: flex;
       align-items: center;
       gap: 40px;
@@ -22,23 +18,31 @@
       height: auto;
     }
 
-    #text {
+    svg {
+      width: auto;
+      height: 200px;
+    }
+
+    text {
       font-family: 'Segoe UI', sans-serif;
       font-size: 160px;
       font-weight: bold;
-      background: linear-gradient(to right, blue, white, red);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-      text-shadow: 2px 2px 4px #000;
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <img id="map" src="https://static.vecteezy.com/system/resources/thumbnails/017/197/464/small/usa-concept-represented-by-map-and-flag-icon-isolated-and-flat-illustration-free-png.png" alt="US Map" />
-    <div id="text">STATE: State 1/50</div>
-  </div>
+  <img id="map" src="https://static.vecteezy.com/system/resources/thumbnails/017/197/464/small/usa-concept-represented-by-map-and-flag-icon-isolated-and-flat-illustration-free-png.png" alt="US Map" />
+
+  <svg viewBox="0 0 1200 200" preserveAspectRatio="xMinYMid meet">
+    <defs>
+      <linearGradient id="usFlagGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="blue" />
+        <stop offset="50%" stop-color="white" />
+        <stop offset="100%" stop-color="red" />
+      </linearGradient>
+    </defs>
+    <text x="0" y="150" fill="url(#usFlagGradient)" id="stateText">STATE: State 1/50</text>
+  </svg>
 
   <script>
     const fieldData = {
@@ -47,7 +51,7 @@
     };
 
     const updateText = () => {
-      document.getElementById("text").textContent = `STATE: ${fieldData.stateName} ${fieldData.stateNumber}/50`;
+      document.getElementById("stateText").textContent = `STATE: ${fieldData.stateName} ${fieldData.stateNumber}/50`;
     };
 
     window.addEventListener('onEventReceived', function (obj) {
