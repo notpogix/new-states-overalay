@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 48px;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    #container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #map {
+      width: 60px;
+      height: auto;
+    }
+
+    #text {
+      background: linear-gradient(270deg, red, white, blue, red);
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 5s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img id="map" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Blank_US_Map.svg/200px-Blank_US_Map.svg.png" alt="US Map" />
+    <div id="text">STATE: State 1/50</div>
+  </div>
+
+  <script>
+    const fieldData = {
+      stateName: "State",
+      stateNumber: 1
+    };
+
+    const updateText = () => {
+      document.getElementById("text").textContent = `STATE: ${fieldData.stateName} ${fieldData.stateNumber}/50`;
+    };
+
+    window.addEventListener('onEventReceived', function (obj) {
+      if (!obj.detail.event || obj.detail.listener !== 'message') return;
+      const msg = obj.detail.event.data.text;
+      const isMod = obj.detail.event.data.tags.mod || obj.detail.event.data.tags.badges?.broadcaster;
+
+      if (!isMod) return;
+
+      if (msg.startsWith('!state ')) {
+        fieldData.stateName = msg.split(' ')[1].toUpperCase();
+        updateText();
+      }
+
+      if (msg.startsWith('!staten ')) {
+        const num = parseInt(msg.split(' ')[1]);
+        if (!isNaN(num) && num >= 0 && num <= 50) {
+          fieldData.stateNumber = num;
+          updateText();
+        }
+      }
+    });
+
+    updateText();
+  </script>
+</body>
+</html>
