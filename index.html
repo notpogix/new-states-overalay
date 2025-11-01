@@ -24,25 +24,16 @@
     }
 
     #text {
-      background: linear-gradient(135deg,
-        #a88beb,
-        #ffffff,
-        #c084f5,
-        #ffffff,
-        #a88beb,
-        #c084f5);
-      background-size: 2000% 2000%;
+      background: linear-gradient(90deg, red, white, blue, red);
+      background-size: 600% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientFlow 40s ease infinite;
+      animation: flagFlow 20s linear infinite;
     }
 
-    @keyframes gradientFlow {
-      0% { background-position: 0% 0%; }
-      25% { background-position: 100% 0%; }
-      50% { background-position: 100% 100%; }
-      75% { background-position: 0% 100%; }
-      100% { background-position: 0% 0%; }
+    @keyframes flagFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
   </style>
 </head>
