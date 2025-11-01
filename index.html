@@ -24,16 +24,10 @@
     }
 
     #text {
-      background: linear-gradient(90deg, red, white, blue, red);
-      background-size: 600% 100%;
+      background: linear-gradient(to right, blue, white, red);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: flagFlow 20s linear infinite;
-    }
-
-    @keyframes flagFlow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+      display: inline-block;
     }
   </style>
 </head>
